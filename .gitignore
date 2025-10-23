@@ -1,0 +1,54 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+*.iml
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+*.egg-info/
+.pytest_cache/
+.benchmarks/
+htmlcov/
+.coverage
+
+# C
+*.o
+*.out
+*.exe
+matrix_benchmark
+benchmark_c
+benchmark_c_enhanced
+perf.data
+perf.data.old
+
+# Results
+results/
+*.txt
+*.csv
+*.json
+!results/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor
+.vscode/
+.idea/
+*.sublime-*
