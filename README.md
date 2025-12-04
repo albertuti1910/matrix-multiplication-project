@@ -1,7 +1,9 @@
 # Big Data Course Assignments
 
-**Institution:** Universidad de Las Palmas de Gran Canaria  
-**Degree:** Grado en Ciencia e Ingeniería de Datos  
+**Institution:** Universidad de Las Palmas de Gran Canaria
+
+**Degree:** Grado en Ciencia e Ingeniería de Datos
+
 **Subject:** Big Data
 
 ## Overview
@@ -15,7 +17,8 @@ The goal is to evaluate the performance, scalability, and resource usage of vari
 Each assignment is isolated in its own directory containing the source code, benchmark scripts, and performance reports.
 
 ### [Task 1: Basic Matrix Multiplication](./task1)
-**Topic:** Language Performance Comparison  
+**Topic:** Language Performance Comparison
+
 **Status:** Completed
 
 Comparison of a standard $O(n^3)$ matrix multiplication algorithm implemented in three languages:
@@ -28,7 +31,8 @@ Comparison of a standard $O(n^3)$ matrix multiplication algorithm implemented in
 ---
 
 ### [Task 2: Optimized & Sparse Matrices](./task2)
-**Topic:** Optimization Techniques and Sparse Data Structures  
+**Topic:** Optimization Techniques and Sparse Data Structures
+
 **Status:** Completed
 
 Investigation into techniques to improve computational cost and handle memory constraints:
@@ -40,8 +44,17 @@ Investigation into techniques to improve computational cost and handle memory co
 
 ---
 
-### Task 3
-*To be added.*
+### [Task 3: Parallel & Vectorized Matrix Multiplication](./task3)
+**Topic:** High-Performance Computing (OpenMP & AVX2)
+
+**Status:** Completed
+
+Investigation into the "Memory Wall" and CPU throughput limits:
+- **Parallel:** Multi-threading using OpenMP.
+- **Vectorized:** SIMD Intrinsics (AVX2) and Memory Transposition.
+- **Hardware Analysis:** Using `perf` to measure IPC (Instructions Per Cycle) and L3 Cache Misses.
+
+**Key Findings:** Naive parallelization causes cache thrashing ($6.9B$ misses), while vectorization yields a $91\times$ speedup.
 
 ---
 
