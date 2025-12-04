@@ -4,7 +4,6 @@ Benchmark comparing Dense and Sparse Matrix-Vector Multiplication performance us
 
 ## Requirements
 
-- **OS:** Linux
 - **C++:** GCC compiler with OpenMP support
 - **Python:** Python 3.x with pandas and matplotlib
 - **Tools:** perf (optional, for bottleneck analysis)
@@ -25,7 +24,7 @@ g++ -O2 -fopenmp -o spmv_bench spmv_final.cpp
 
 **Note:** If `mc2depi.mtx` is present in the directory, the "Huge Matrix" test will run automatically.
 
-**Output:** 
+**Output:**
 - `results_sparsity.csv`
 - `results_size.csv`
 
