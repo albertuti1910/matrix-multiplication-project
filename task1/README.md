@@ -99,7 +99,7 @@ python generate_graphs.py
 ## Project Structure
 
 ```
-matrix-benchmark-project/
+task1/
 ├── c/
 │   ├── matrix_benchmark.c
 │   ├── matrix_c.c
