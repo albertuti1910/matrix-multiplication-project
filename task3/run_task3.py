@@ -4,9 +4,7 @@ import pandas as pd
 import sys
 import re
 
-# --- CONFIGURATION ---
-# We stop Basic/Parallel earlier because they are slow.
-# We run Vectorized larger to show off power.
+
 SIZES = [128, 256, 512, 1024, 2048]
 MODES = ["basic", "parallel", "vectorized"]
 
@@ -23,14 +21,13 @@ def parse_perf_output(stderr_output):
     """ Extract cycles, instructions, and cache-misses from perf output """
     metrics = {"seconds": 0.0, "cache-misses": 0, "instructions": 0, "cycles": 0}
 
-    # Regex to find numbers in perf output (handles commas 1,000)
     for line in stderr_output.splitlines():
         line = line.strip()
         if "seconds time elapsed" in line:
             metrics["seconds"] = float(line.split()[0].replace(',', ''))
         elif "cache-misses" in line:
             parts = line.split()
-            if parts[0] != "<not": # Handle "<not supported>" errors
+            if parts[0] != "<not":
                 metrics["cache-misses"] = int(parts[0].replace(',', ''))
         elif "instructions" in line:
             metrics["instructions"] = int(line.split()[0].replace(',', ''))
@@ -46,12 +43,7 @@ def run_benchmarks():
 
     for size in SIZES:
         for mode in MODES:
-            # Skip Basic on 2048 if you don't want to wait 50s each time
-            # if mode == "basic" and size > 2048: continue
-
             # Construct perf command
-            # -x, : CSV format (easier to parse? actually default is readable enough)
-            # -e : events to record
             cmd = [
                 "perf", "stat",
                 "-e", "cache-misses,cycles,instructions",
@@ -65,7 +57,6 @@ def run_benchmarks():
                 print(f"Error in {mode} {size}")
                 continue
 
-            # Parse stats from stderr (perf prints there)
             metrics = parse_perf_output(result.stderr)
 
             # Calculate GFLOPS: (2 * N^3) / Time / 10^9
@@ -88,13 +79,10 @@ def run_benchmarks():
     return pd.DataFrame(data)
 
 def generate_plots(df):
-    plt.style.use('seaborn-v0_8-whitegrid') # Nice visual style
-
-    # Define colors
+    plt.style.use('seaborn-v0_8-whitegrid')
     colors = {'basic': 'red', 'parallel': 'orange', 'vectorized': 'green'}
     markers = {'basic': 'o', 'parallel': 's', 'vectorized': '^'}
 
-    # Helper to clean plots
     def plot_metric(metric_col, ylabel, title, filename, log_y=False):
         plt.figure(figsize=(10, 6))
         for mode in MODES:
@@ -137,7 +125,6 @@ def generate_plots(df):
 
     for mode in ["parallel", "vectorized"]:
         subset = df[df["Mode"] == mode].set_index("Size")
-        # Ensure indices match
         common_sizes = basic_df.index.intersection(subset.index)
         if common_sizes.empty: continue
 

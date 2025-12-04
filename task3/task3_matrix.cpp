@@ -9,7 +9,6 @@
 using Scalar = double;
 
 void init_matrix(std::vector<Scalar>& M, int N) {
-    // Fixed seed for fair comparison across runs
     std::mt19937 gen(42);
     std::uniform_real_distribution<Scalar> dis(0.0, 1.0);
     for (int i = 0; i < N * N; ++i) M[i] = dis(gen);
@@ -26,7 +25,7 @@ void multiply_basic(const std::vector<Scalar>& A, const std::vector<Scalar>& B, 
     }
 }
 
-// 2. Parallel (No Transpose - shows cache issues)
+// 2. Parallel (No Transpose)
 void multiply_parallel(const std::vector<Scalar>& A, const std::vector<Scalar>& B, std::vector<Scalar>& C, int N) {
     #pragma omp parallel for schedule(dynamic)
     for (int i = 0; i < N; ++i) {
@@ -38,7 +37,7 @@ void multiply_parallel(const std::vector<Scalar>& A, const std::vector<Scalar>& 
     }
 }
 
-// 3. Vectorized + Parallel + Transposed (Optimized)
+// 3. Vectorized + Parallel + Transposed
 void multiply_vectorized(const std::vector<Scalar>& A, const std::vector<Scalar>& B, std::vector<Scalar>& C, int N) {
     std::vector<Scalar> B_T(N * N);
 
